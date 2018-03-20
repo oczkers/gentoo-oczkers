@@ -18,4 +18,5 @@ IUSE=""
 
 DEPEND="dev-python/setuptools"
 
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+         media-gfx/imagemagick"
