@@ -20,6 +20,5 @@ DEPEND="dev-python/setuptools"
 
 RDEPEND="${DEPEND}
          dev-python/requests
-         dev-python/pyopenssl
          app-arch/brotli
          dev-python/requests-toolbelt"
