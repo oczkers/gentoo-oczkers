@@ -20,5 +20,4 @@ DEPEND="dev-python/setuptools"
 
 RDEPEND="${DEPEND}
          dev-python/requests
-         app-arch/brotli
          dev-python/requests-toolbelt"
