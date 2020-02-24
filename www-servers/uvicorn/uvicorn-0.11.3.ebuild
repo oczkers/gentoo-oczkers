@@ -23,7 +23,8 @@ RDEPEND="
     >=dev-python/h11-0.8[${PYTHON_USEDEP}]
     <dev-python/h11-0.10[${PYTHON_USEDEP}]
     >=dev-python/uvloop-0.14.0[${PYTHON_USEDEP}]
-    <dev-python/httptools-0.1.0[${PYTHON_USEDEP}]
+    >=dev-python/httptools-0.1.0[${PYTHON_USEDEP}]
+    <dev-python/httptools-0.2.0[${PYTHON_USEDEP}]
 "
 
     # >=dev-python/httptools-0.1.0[${PYTHON_USEDEP}]
