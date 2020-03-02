@@ -7,20 +7,16 @@ PYTHON_COMPAT=(python3_{6,7,8} pypy3 )
 
 inherit distutils-r1
 
-DESCRIPTION="The little ASGI framework that shines."
-HOMEPAGE="https://www.starlette.io/"
+DESCRIPTION="Server Sent Events for Starlette"
+HOMEPAGE="https://github.com/sysid/sse-starlette"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
-IUSE="+jinja +multipart sse"  # TODO: more
+IUSE=""
 
-RDEPEND="
-	jinja? ( dev-python/jinja[${PYTHON_USEDEP}] )
-	multipart? ( dev-python/python-multipart[${PYTHON_USEDEP}] )
-	sse? ( dev-python/sse-starlette[${PYTHON_USEDEP}] )
-"
+RDEPEND=""
 
 BDEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
