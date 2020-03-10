@@ -6,9 +6,9 @@ PYTHON_COMPAT=( python2_7 python3_{5,6,7,8} pypy )
 
 inherit distutils-r1
 
-DESCRIPTION=""
-HOMEPAGE=""
-SRC_URI="https://github.com/VeNoMouS/${PN}/archive/${PV}.tar.gz"
+DESCRIPTION="Powerful polling utility in Python"
+HOMEPAGE="https://github.com/justiniso/polling"
+SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -18,6 +18,4 @@ IUSE=""
 
 DEPEND="dev-python/setuptools"
 
-RDEPEND="${DEPEND}
-         dev-python/requests
-         dev-python/requests-toolbelt"
+RDEPEND="${DEPEND}"
