@@ -10,7 +10,8 @@ inherit distutils-r1
 
 DESCRIPTION="Async database support for Python."
 HOMEPAGE="https://www.encode.io/databases/"
-SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+# SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
+SRC_URI="https://github.com/encode/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
