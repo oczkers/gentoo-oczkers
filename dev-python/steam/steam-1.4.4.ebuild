@@ -28,5 +28,5 @@ RDEPEND="${DEPEND}
          dev-python/cachetools
          dev-python/vdf
          dev-python/pycryptodome
-         dev-python/protobuf-python
-         dev-python/gevent"  # https://pypi.org/simple/gevent-eventemitter/
+         dev-python/protobuf-python"
+         # dev-python/gevent"  # https://pypi.org/simple/gevent-eventemitter/
