@@ -318,6 +318,7 @@ CRATES="
 "
 
 RUST_MIN_VER="1.81.0"
+RUSTY_V8_VER="130.0.7"
 
 inherit cargo
 
@@ -325,6 +326,14 @@ DESCRIPTION="Run YouTube Botguard challenges and generate PO tokens"
 HOMEPAGE="https://codeberg.org/ThetaDev/rustypipe-botguard"
 SRC_URI="
 	https://codeberg.org/ThetaDev/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
+	amd64? (
+		https://github.com/denoland/rusty_v8/releases/download/v${RUSTY_V8_VER}/librusty_v8_release_x86_64-unknown-linux-gnu.a.gz
+			-> librusty_v8_release_x86_64-unknown-linux-gnu-${RUSTY_V8_VER}.a.gz
+	)
+	arm64? (
+		https://github.com/denoland/rusty_v8/releases/download/v${RUSTY_V8_VER}/librusty_v8_release_aarch64-unknown-linux-gnu.a.gz
+			-> librusty_v8_release_aarch64-unknown-linux-gnu-${RUSTY_V8_VER}.a.gz
+	)
 	${CARGO_CRATE_URIS}
 "
 S="${WORKDIR}/${PN}"
@@ -333,7 +342,7 @@ LICENSE="MIT"
 # Dependent crate licenses
 LICENSE+=" 0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD Boost-1.0 ISC MIT MPL-2.0 Unicode-3.0 Unicode-DFS-2016 Unlicense ZLIB"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 
 DEPEND="dev-libs/openssl:="
 RDEPEND="${DEPEND}"
@@ -343,7 +352,26 @@ QA_FLAGS_IGNORED="usr/bin/${PN}"
 
 DOCS=( README.md CHANGELOG.md )
 
+_set_rusty_v8_archive() {
+	local rusty_v8_triple
+	use amd64 && rusty_v8_triple="x86_64-unknown-linux-gnu"
+	use arm64 && rusty_v8_triple="aarch64-unknown-linux-gnu"
+
+	export RUSTY_V8_ARCHIVE="${DISTDIR}/librusty_v8_release_${rusty_v8_triple}-${RUSTY_V8_VER}.a.gz"
+}
+
+src_compile() {
+	_set_rusty_v8_archive
+	cargo_src_compile
+}
+
+src_test() {
+	_set_rusty_v8_archive
+	cargo_src_test
+}
+
 src_install() {
+	_set_rusty_v8_archive
 	cargo_src_install
 	einstalldocs
 }
