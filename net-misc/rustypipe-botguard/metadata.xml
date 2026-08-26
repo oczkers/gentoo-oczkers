@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>piotr.staroszczyk@get24.org</email>
+		<name>Piotr Staroszczyk</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="codeberg">ThetaDev/rustypipe-botguard</remote-id>
+		<remote-id type="crates-io">rustypipe-botguard</remote-id>
+	</upstream>
+</pkgmetadata>
