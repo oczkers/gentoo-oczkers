@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>piotr.staroszczyk@get24.org</email>
+		<name>Piotr Staroszczyk</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">akhundMurad/typeid-python</remote-id>
+		<remote-id type="pypi">typeid-python</remote-id>
+	</upstream>
+	<use>
+		<flag name="cli">Enable CLI support via dev-python/click</flag>
+		<flag name="yaml">Enable YAML support via dev-python/pyyaml</flag>
+	</use>
+</pkgmetadata>
