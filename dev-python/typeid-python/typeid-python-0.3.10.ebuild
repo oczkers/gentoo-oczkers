@@ -54,3 +54,10 @@ RDEPEND="
 "
 
 QA_FLAGS_IGNORED="usr/lib.*/py.*/site-packages/typeid/_base32.*.so"
+
+src_prepare() {
+	distutils-r1_src_prepare
+
+	# Prevent stray LICENSE and README.md from being installed into site-packages
+	sed -i -e '/include = /d' pyproject.toml || die
+}
