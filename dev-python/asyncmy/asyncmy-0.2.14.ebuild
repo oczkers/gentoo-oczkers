@@ -1,9 +1,9 @@
-# Copyright 2022-2023 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..14} )
 PYTHON_REQ_USE="ssl"
 DISTUTILS_USE_PEP517=poetry
 DISTUTILS_EXT=1
@@ -12,17 +12,17 @@ inherit databases distutils-r1 optfeature
 DESCRIPTION="A fast asyncio MySQL driver"
 HOMEPAGE="
 	https://pypi.org/project/asyncmy/
-	https://github.com/long2ice/asyncmy
+	https://github.com/long2ice/asyncmy/
 "
 SRC_URI="https://github.com/long2ice/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 TEST_S="${S}_test"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 BDEPEND="
-	dev-python/cython[${PYTHON_USEDEP}]
+	>=dev-python/cython-3.1[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
 		${DATABASES_DEPEND[mysql]}
