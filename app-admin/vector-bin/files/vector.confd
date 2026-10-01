@@ -1,9 +1,12 @@
 # /etc/conf.d/vector
 
-# Options to pass to vector
+# Configuration file to use.
+# By default, /etc/vector/vector.yaml is targeted if left unset.
+VECTOR_CONFIG="/etc/vector/vector.yaml"
+
+# Additional options to pass to vector daemon
 # Run `vector --help` for valid cmdline options.
-# By default vector reads /etc/vector/vector.yaml
-VECTOR_OPTS="--config /etc/vector/vector.yaml"
+VECTOR_OPTS=""
 
 # User and group daemon runs as
 VECTOR_USER="vector"

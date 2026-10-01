@@ -10,14 +10,18 @@ command_user="${VECTOR_USER:-vector}:${VECTOR_GROUP:-vector}"
 pidfile="/run/${RC_SVCNAME}.pid"
 output_log="${VECTOR_LOG:-/var/log/vector/vector.log}"
 error_log="${VECTOR_ERR:-/var/log/vector/vector.err}"
-command_args="${VECTOR_OPTS}"
+
+config="${VECTOR_CONFIG:-/etc/vector/vector.yaml}"
+command_args="${config:+--config ${config}} ${VECTOR_OPTS}"
 
 extra_commands="checkconfig"
+extra_started_commands="reload"
 description_checkconfig="Check configuration syntax"
+description_reload="Reload configuration"
 
 checkconfig() {
 	ebegin "Checking ${RC_SVCNAME} configuration"
-	${command} validate ${VECTOR_OPTS}
+	${command} validate ${config:+"${config}"}
 	eend $?
 }
 
@@ -27,6 +31,13 @@ start_pre() {
 	fi
 	checkpath -d -m 0750 -o "${VECTOR_USER:-vector}:${VECTOR_GROUP:-vector}" /var/lib/vector
 	checkpath -d -m 0755 -o "${VECTOR_USER:-vector}:${VECTOR_GROUP:-vector}" /var/log/vector
+}
+
+reload() {
+	checkconfig || return 1
+	ebegin "Reloading ${RC_SVCNAME}"
+	start-stop-daemon --signal HUP --pidfile "${pidfile}"
+	eend $?
 }
 
 depend() {
