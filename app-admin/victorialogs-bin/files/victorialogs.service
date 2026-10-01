@@ -1,0 +1,18 @@
+[Unit]
+Description=VictoriaLogs - High-performance log management and analytics service
+Documentation=https://docs.victoriametrics.com/victorialogs/
+After=network.target
+
+[Service]
+Type=simple
+User=victorialogs
+Group=victorialogs
+EnvironmentFile=-/etc/default/victorialogs
+ExecStart=/usr/bin/victorialogs $VICTORIALOGS_OPTS
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+LimitNPROC=32768
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+# /etc/conf.d/victorialogs
+
+# Options to pass to VictoriaLogs
+# Run `victorialogs --help` for valid options.
+VICTORIALOGS_OPTS="-storageDataPath=/var/lib/victorialogs -httpListenAddr=:9428 -retentionPeriod=7d"
+
+# User and group daemon runs as
+VICTORIALOGS_USER="victorialogs"
+VICTORIALOGS_GROUP="victorialogs"
+
+# Log files (for OpenRC)
+VICTORIALOGS_LOG="/var/log/victorialogs/victorialogs.log"
+VICTORIALOGS_ERR="/var/log/victorialogs/victorialogs.err"

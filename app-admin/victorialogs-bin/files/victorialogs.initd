@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="VictoriaLogs"
+description="VictoriaLogs - High-performance log management and analytics service"
+command="/usr/bin/victorialogs"
+command_background="yes"
+command_user="${VICTORIALOGS_USER:-victorialogs}:${VICTORIALOGS_GROUP:-victorialogs}"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="${VICTORIALOGS_LOG:-/var/log/victorialogs/victorialogs.log}"
+error_log="${VICTORIALOGS_ERR:-/var/log/victorialogs/victorialogs.err}"
+command_args="${VICTORIALOGS_OPTS}"
+
+start_pre() {
+	checkpath -d -m 0750 -o "${VICTORIALOGS_USER:-victorialogs}:${VICTORIALOGS_GROUP:-victorialogs}" /var/lib/victorialogs
+	checkpath -d -m 0755 -o "${VICTORIALOGS_USER:-victorialogs}:${VICTORIALOGS_GROUP:-victorialogs}" /var/log/victorialogs
+}
+
+depend() {
+	need net
+	after firewall
+}

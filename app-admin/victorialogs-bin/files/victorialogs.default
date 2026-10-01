@@ -1,0 +1,4 @@
+# /etc/default/victorialogs
+
+# Configuration options for VictoriaLogs systemd service
+VICTORIALOGS_OPTS="-storageDataPath=/var/lib/victorialogs -httpListenAddr=:9428 -retentionPeriod=7d"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>piotr.staroszczyk@get24.org</email>
+		<name>Piotr Staroszczyk</name>
+	</maintainer>
+	<use>
+		<flag name="tools">Install companion utilities (vlagent and vlogscli)</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">VictoriaMetrics/VictoriaLogs</remote-id>
+	</upstream>
+</pkgmetadata>
