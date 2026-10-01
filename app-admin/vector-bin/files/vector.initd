@@ -1,0 +1,35 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="Vector"
+description="Vector observability data pipeline"
+command="/usr/bin/vector"
+command_background="yes"
+command_user="${VECTOR_USER:-vector}:${VECTOR_GROUP:-vector}"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="${VECTOR_LOG:-/var/log/vector/vector.log}"
+error_log="${VECTOR_ERR:-/var/log/vector/vector.err}"
+command_args="${VECTOR_OPTS}"
+
+extra_commands="checkconfig"
+description_checkconfig="Check configuration syntax"
+
+checkconfig() {
+	ebegin "Checking ${RC_SVCNAME} configuration"
+	${command} validate ${VECTOR_OPTS}
+	eend $?
+}
+
+start_pre() {
+	if [ "${RC_CMD}" != "restart" ]; then
+		checkconfig || return 1
+	fi
+	checkpath -d -m 0750 -o "${VECTOR_USER:-vector}:${VECTOR_GROUP:-vector}" /var/lib/vector
+	checkpath -d -m 0755 -o "${VECTOR_USER:-vector}:${VECTOR_GROUP:-vector}" /var/log/vector
+}
+
+depend() {
+	need net
+	after firewall
+}

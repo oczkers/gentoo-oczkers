@@ -1,0 +1,14 @@
+# /etc/conf.d/vector
+
+# Options to pass to vector
+# Run `vector --help` for valid cmdline options.
+# By default vector reads /etc/vector/vector.yaml
+VECTOR_OPTS="--config /etc/vector/vector.yaml"
+
+# User and group daemon runs as
+VECTOR_USER="vector"
+VECTOR_GROUP="vector"
+
+# Log files
+VECTOR_LOG="/var/log/vector/vector.log"
+VECTOR_ERR="/var/log/vector/vector.err"
