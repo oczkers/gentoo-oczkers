@@ -1,0 +1,18 @@
+[Unit]
+Description=bitmagnet - BitTorrent indexer and DHT crawler
+Documentation=https://bitmagnet.io/
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=bitmagnet
+Group=bitmagnet
+WorkingDirectory=/var/lib/bitmagnet
+EnvironmentFile=-/etc/default/bitmagnet
+ExecStart=/usr/bin/bitmagnet $BITMAGNET_OPTS
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

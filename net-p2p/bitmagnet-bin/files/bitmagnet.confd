@@ -1,0 +1,21 @@
+# /etc/conf.d/bitmagnet
+
+# Options to pass to bitmagnet
+BITMAGNET_OPTS="worker run --all"
+
+# User and group daemon runs as
+BITMAGNET_USER="bitmagnet"
+BITMAGNET_GROUP="bitmagnet"
+
+# Log files (for OpenRC)
+BITMAGNET_LOG="/var/log/bitmagnet/bitmagnet.log"
+BITMAGNET_ERR="/var/log/bitmagnet/bitmagnet.err"
+
+# Extra config file path or environment variables can be exported here:
+# export EXTRA_CONFIG_FILES="/etc/bitmagnet/config.yml"
+# export POSTGRES_HOST="localhost"
+# export POSTGRES_PORT="5432"
+# export POSTGRES_NAME="bitmagnet"
+# export POSTGRES_USER="postgres"
+# export POSTGRES_PASSWORD=""
+# export TMDB_API_KEY=""

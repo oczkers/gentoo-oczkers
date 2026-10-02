@@ -1,0 +1,25 @@
+# Example configuration for bitmagnet
+# Place in /etc/bitmagnet/config.yml and specify EXTRA_CONFIG_FILES=/etc/bitmagnet/config.yml
+# or place in /var/lib/bitmagnet/config.yml (working directory)
+
+postgres:
+  host: localhost
+  port: 5432
+  name: bitmagnet
+  user: postgres
+  password: ""
+
+# tmdb:
+#   api_key: "your_tmdb_api_key"
+#   enabled: true
+
+# dht_crawler:
+#   scaling_factor: 10
+#   save_files_threshold: 100
+
+# http_server:
+#   options:
+#     - "*"
+
+# log:
+#   level: info

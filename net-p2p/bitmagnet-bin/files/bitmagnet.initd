@@ -1,0 +1,24 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="bitmagnet"
+description="BitTorrent indexer and DHT crawler"
+command="/usr/bin/bitmagnet"
+command_background="yes"
+command_user="${BITMAGNET_USER:-bitmagnet}:${BITMAGNET_GROUP:-bitmagnet}"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="${BITMAGNET_LOG:-/var/log/bitmagnet/bitmagnet.log}"
+error_log="${BITMAGNET_ERR:-/var/log/bitmagnet/bitmagnet.err}"
+directory="/var/lib/bitmagnet"
+command_args="${BITMAGNET_OPTS:-worker run --all}"
+
+start_pre() {
+	checkpath -d -m 0750 -o "${BITMAGNET_USER:-bitmagnet}:${BITMAGNET_GROUP:-bitmagnet}" /var/lib/bitmagnet
+	checkpath -d -m 0755 -o "${BITMAGNET_USER:-bitmagnet}:${BITMAGNET_GROUP:-bitmagnet}" /var/log/bitmagnet
+}
+
+depend() {
+	need net
+	after postgresql
+}

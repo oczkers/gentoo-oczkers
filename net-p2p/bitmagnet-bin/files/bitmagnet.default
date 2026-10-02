@@ -1,0 +1,13 @@
+# /etc/default/bitmagnet
+
+# Configuration options for bitmagnet systemd service
+BITMAGNET_OPTS="worker run --all"
+
+# Environment variables for bitmagnet:
+# EXTRA_CONFIG_FILES=/etc/bitmagnet/config.yml
+# POSTGRES_HOST=localhost
+# POSTGRES_PORT=5432
+# POSTGRES_NAME=bitmagnet
+# POSTGRES_USER=postgres
+# POSTGRES_PASSWORD=
+# TMDB_API_KEY=
