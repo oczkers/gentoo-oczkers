@@ -29,7 +29,18 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64"
 RESTRICT="strip test"
 
-RDEPEND="!net-p2p/rqbit"
+DEPEND="
+	acct-group/rqbit
+	acct-user/rqbit
+"
+RDEPEND="
+	${DEPEND}
+	!net-p2p/rqbit
+"
+BDEPEND="
+	acct-group/rqbit
+	acct-user/rqbit
+"
 
 QA_PREBUILT="usr/bin/rqbit"
 
@@ -67,22 +78,53 @@ src_install() {
 		dofishcomp rqbit.fish
 	fi
 
+	# OpenRC service and configuration
+	newinitd "${FILESDIR}"/rqbit.initd rqbit
+	newconfd "${FILESDIR}"/rqbit.confd rqbit
+
+	# Configuration file in /etc/rqbit/
+	insinto /etc/rqbit
+	newins "${FILESDIR}"/rqbit.conf rqbit.conf
+
+	# systemd system service and default env
+	systemd_newunit "${FILESDIR}"/rqbit.system.service rqbit.service
+	insinto /etc/default
+	newins "${FILESDIR}"/rqbit.default rqbit
+
+	# systemd user units
 	systemd_douserunit "${FILESDIR}"/rqbit.service
 	systemd_douserunit "${FILESDIR}"/rqbit.socket
 
-	insinto /usr/share/rqbit
-	doins "${FILESDIR}"/rqbit.conf
+	# State and log directories
+	keepdir /var/lib/rqbit
+	keepdir /var/lib/rqbit/downloads
+	fowners rqbit:rqbit /var/lib/rqbit
+	fowners rqbit:rqbit /var/lib/rqbit/downloads
+	fperms 0750 /var/lib/rqbit
+	fperms 0755 /var/lib/rqbit/downloads
+
+	keepdir /var/log/rqbit
+	fowners rqbit:rqbit /var/log/rqbit
+	fperms 0755 /var/log/rqbit
 }
 
 pkg_postinst() {
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
-		elog "rqbit can be run as a systemd user service:"
+		elog "rqbit can be run as an OpenRC system service:"
+		elog "  rc-service rqbit start"
+		elog "  rc-update add rqbit default"
+		elog ""
+		elog "Or as a systemd system service:"
+		elog "  systemctl enable --now rqbit.service"
+		elog ""
+		elog "Or as a systemd user service:"
 		elog "  systemctl --user enable --now rqbit.socket"
 		elog ""
-		elog "Web UI is available at http://localhost:3030/web/"
+		elog "Configuration files are located at:"
+		elog "  ${EROOT}/etc/rqbit/rqbit.conf"
+		elog "  ${EROOT}/etc/conf.d/rqbit (OpenRC)"
+		elog "  ${EROOT}/etc/default/rqbit (systemd)"
 		elog ""
-		elog "A configuration template has been installed to:"
-		elog "  ${EROOT}/usr/share/rqbit/rqbit.conf"
-		elog "Copy it to ~/.config/rqbit/rqbit.conf to customize settings."
+		elog "Default Web UI is available at http://localhost:3030/web/"
 	fi
 }

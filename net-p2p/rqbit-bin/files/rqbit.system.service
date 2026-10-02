@@ -1,0 +1,19 @@
+[Unit]
+Description=rqbit - Bittorrent client and server
+Documentation=https://github.com/ikatson/rqbit
+After=network.target
+
+[Service]
+Type=simple
+User=rqbit
+Group=rqbit
+WorkingDirectory=/var/lib/rqbit
+EnvironmentFile=-/etc/default/rqbit
+EnvironmentFile=-/etc/rqbit/rqbit.conf
+ExecStart=/usr/bin/rqbit server start $RQBIT_OPTS /var/lib/rqbit/downloads
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

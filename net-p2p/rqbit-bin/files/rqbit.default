@@ -1,0 +1,6 @@
+# /etc/default/rqbit
+
+# Configuration options for rqbit systemd service
+RQBIT_OPTS=""
+
+# Additional environment variables can also be set here or in /etc/rqbit/rqbit.conf

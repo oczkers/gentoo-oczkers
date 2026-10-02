@@ -1,0 +1,33 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="rqbit"
+description="rqbit - Bittorrent client and server"
+command="/usr/bin/rqbit"
+command_background="yes"
+command_user="${RQBIT_USER:-rqbit}:${RQBIT_GROUP:-rqbit}"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="${RQBIT_LOG:-/var/log/rqbit/rqbit.log}"
+error_log="${RQBIT_ERR:-/var/log/rqbit/rqbit.err}"
+directory="${RQBIT_DIR:-/var/lib/rqbit}"
+
+start_pre() {
+	checkpath -d -m 0750 -o "${RQBIT_USER:-rqbit}:${RQBIT_GROUP:-rqbit}" "${RQBIT_DIR:-/var/lib/rqbit}"
+	checkpath -d -m 0755 -o "${RQBIT_USER:-rqbit}:${RQBIT_GROUP:-rqbit}" "${RQBIT_DOWNLOAD_DIR:-/var/lib/rqbit/downloads}"
+	checkpath -d -m 0755 -o "${RQBIT_USER:-rqbit}:${RQBIT_GROUP:-rqbit}" /var/log/rqbit
+
+	if [ -f "${RQBIT_CONF:-/etc/rqbit/rqbit.conf}" ]; then
+		set -a
+		# shellcheck disable=SC1090
+		. "${RQBIT_CONF:-/etc/rqbit/rqbit.conf}"
+		set +a
+	fi
+
+	command_args="server start ${RQBIT_OPTS} ${RQBIT_DOWNLOAD_DIR:-/var/lib/rqbit/downloads}"
+}
+
+depend() {
+	need net
+	after firewall
+}

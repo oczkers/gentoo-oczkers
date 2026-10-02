@@ -1,0 +1,22 @@
+# /etc/conf.d/rqbit
+
+# User and group daemon runs as
+RQBIT_USER="rqbit"
+RQBIT_GROUP="rqbit"
+
+# Path to environment file containing RQBIT_* settings
+RQBIT_CONF="/etc/rqbit/rqbit.conf"
+
+# Working directory for daemon
+RQBIT_DIR="/var/lib/rqbit"
+
+# Directory where downloaded files are saved
+RQBIT_DOWNLOAD_DIR="/var/lib/rqbit/downloads"
+
+# Extra command-line options to pass to `rqbit server start`
+# e.g.: --fastresume --watch-folder=/var/lib/rqbit/watch
+RQBIT_OPTS=""
+
+# Log files (for OpenRC)
+RQBIT_LOG="/var/log/rqbit/rqbit.log"
+RQBIT_ERR="/var/log/rqbit/rqbit.err"
