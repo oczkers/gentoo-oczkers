@@ -11,3 +11,7 @@ VICTORIALOGS_GROUP="victorialogs"
 # Log files (for OpenRC)
 VICTORIALOGS_LOG="/var/log/victorialogs/victorialogs.log"
 VICTORIALOGS_ERR="/var/log/victorialogs/victorialogs.err"
+
+# File descriptors limit for database compaction and concurrent streams
+rc_ulimit="-n 1048576"
+

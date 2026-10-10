@@ -11,7 +11,7 @@ EnvironmentFile=-/etc/default/victorialogs
 ExecStart=/usr/bin/victorialogs $VICTORIALOGS_OPTS
 Restart=always
 RestartSec=5s
-LimitNOFILE=65536
+LimitNOFILE=1048576
 LimitNPROC=32768
 
 [Install]
